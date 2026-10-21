@@ -1,0 +1,55 @@
+{
+  "name": "dsh-welcome-boot",
+  "version": "1.0.0",
+  "description": "启动DSH默认播放鲸鱼女仆的开机动画，点设置→内置插件→开屏动画就可以换成自己的视频。",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "welcome",
+    "splash",
+    "splash-screen",
+    "boot-animation",
+    "startup-animation",
+    "video",
+    "mp4",
+    "webm"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "assets",
+    "cordis.patch.yml",
+    "icon.webp",
+    "tools/pick-media-file.ps1",
+    "README.md",
+    "LICENSE"
+  ],
+  "icon": "./icon.webp",
+  "meta": {
+    "title": "开屏动画",
+    "description": "启动DSH默认播放鲸鱼女仆的开机动画，点设置→内置插件→开屏动画就可以换成自己的视频。"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": []
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

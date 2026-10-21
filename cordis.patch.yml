@@ -1,0 +1,18 @@
+# dsh-welcome-boot bundle patch
+#
+# 这是插件的「挂载声明」：DSH 启动时按 bundle 层叠加各插件的 patch，
+# 本文件把开屏动画插件插入当前 profile 的配置树。
+#
+# 配置覆盖（只想改某几个字段就只写那几个）：
+#   - id: dsh-welcome-boot
+#     name: dsh-welcome-boot
+#     config:
+#       muted: false      # 播放声音
+#       volume: 1         # 0–1
+#       fit: contain      # cover 铺满裁切（默认）/ contain 完整显示
+#       skip: button      # button / click / auto / never
+#
+# 设置页写入的 `$DSH_HOME/dsh-welcome-boot/config.json` 优先级高于这里的 config。
+- insert:
+    - id: dsh-welcome-boot
+      name: dsh-welcome-boot
