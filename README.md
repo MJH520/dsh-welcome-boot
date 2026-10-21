@@ -1,11 +1,9 @@
-<p align="center">
-  <img src="assets/banner.webp" alt="dsh-welcome-boot" width="100%">
-</p>
+![dsh-welcome-boot](assets/banner.webp)
 
 <h1 align="center">dsh-welcome-boot</h1>
 
 <p align="center">
-  <img src="icon.webp" width="88" alt="icon"><br>
+  <img src="assets/icon-96.webp" width="96" height="96" alt="icon"><br>
   <sub>DSH 开屏动画插件 · 内置视频 / 路径视频 / 声音开关</sub>
 </p>
 
@@ -123,7 +121,8 @@ $DSH_HOME/dsh-welcome-boot/config.json
 ├─ icon.webp             插件图标（512×512）
 ├─ assets/
 │  ├─ default.mp4        内置开屏视频
-│  └─ banner.webp        README 横幅
+│  ├─ banner.webp        README 横幅
+│  └─ icon-96.webp       README 小图标
 ├─ tools/
 │  └─ pick-media-file.ps1  原生文件对话框（Windows）
 ├─ README.md
