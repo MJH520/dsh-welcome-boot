@@ -23,6 +23,12 @@
 - **格式宽松**：视频 `mp4 / m4v / webm / mov / mkv / ogv / ogm / mpg / mpeg / ts`，动图与静图 `gif / apng / webp / avif / png / jpg / jpeg / svg / bmp / ico`。
 - **可拖动进度**：媒体通过支持 `Range` 的路由流式返回，大文件不会一次性读完。
 
+## 截图
+
+| 开屏效果 | 设置页 |
+|---|---|
+| ![开屏动画](assets/screenshots/splash.png) | ![设置页](assets/screenshots/settings.png) |
+
 ## 安装
 
 ### 从 GitHub 安装
@@ -118,11 +124,13 @@ $DSH_HOME/dsh-welcome-boot/config.json
 ├─ client.js             界面半：开屏覆盖层 + 设置页
 ├─ cordis.patch.yml      bundle 挂载声明
 ├─ package.json          清单（dsh.bundle / dsh.client）
+├─ screenshots.json      市场详情页的截图清单
 ├─ icon.webp             插件图标（512×512）
 ├─ assets/
 │  ├─ default.mp4        内置开屏视频
 │  ├─ banner.webp        README 横幅
-│  └─ icon-96.webp       README 小图标
+│  ├─ icon-96.webp       README 小图标
+│  └─ screenshots/       市场详情页截图
 ├─ tools/
 │  └─ pick-media-file.ps1  原生文件对话框（Windows）
 ├─ README.md
@@ -135,9 +143,9 @@ $DSH_HOME/dsh-welcome-boot/config.json
 - Node.js >= 20。
 - Windows 上「选择文件…」走 PowerShell + STA 的原生对话框；没有对话框的宿主会提示直接填路径。
 
-## 致谢
+## 致谢与差异
 
-本项目派生自 [KDDKBD/DeepSeek-splash-animation](https://github.com/KDDKBD/DeepSeek-splash-animation)（MIT）。在此之上做了重命名与若干本地修改：
+本项目派生自 [KDDKBD/DeepSeek-splash-animation](https://github.com/KDDKBD/DeepSeek-splash-animation)（MIT，其版权声明保留在 [LICENSE](LICENSE) 中）。重命名之外，相对上游的差异：
 
 - 新增「内置视频」开关与「播放声音」勾选框；
 - 保存接口支持只提交部分字段（切换开关不会重写路径）；
@@ -148,6 +156,6 @@ $DSH_HOME/dsh-welcome-boot/config.json
 
 ## 许可
 
-[MIT](LICENSE)。
+插件代码采用 [MIT](LICENSE)。
 
-`assets/default.mp4` 为自有素材，不在 MIT 覆盖范围内；`assets/banner.webp` 与 `icon.webp` 由同一素材制作。
+素材不在 MIT 覆盖范围内：`assets/default.mp4` 为自有素材；`assets/banner.webp`、`icon.webp`、`assets/icon-96.webp` 与 `assets/screenshots/` 由同一素材制作或截图。

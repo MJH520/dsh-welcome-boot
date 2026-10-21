@@ -30,6 +30,7 @@
     "assets",
     "cordis.patch.yml",
     "icon.webp",
+    "screenshots.json",
     "tools/pick-media-file.ps1",
     "README.md",
     "LICENSE"
