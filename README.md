@@ -19,15 +19,15 @@
 - **两种视频来源**：勾选「内置视频」播插件自带的那段；取消后播你填的路径。
 - **声音可开关**：桌面端 Electron 默认允许有声自动播放，勾选框即时生效。
 - **播完渐隐**：视频结束停留一帧，再淡出露出界面（默认 0.3 秒）。
-- **可完全关闭**：取消「内置视频」且清空路径，插件不注册任何覆盖层，DSH 按未安装时启动。
+- **可完全关闭**：取消「内置视频」且清空路径，插件不注册任何开屏页面，DSH 按未安装时启动。
 - **格式宽松**：视频 `mp4 / m4v / webm / mov / mkv / ogv / ogm / mpg / mpeg / ts`，动图与静图 `gif / apng / webp / avif / png / jpg / jpeg / svg / bmp / ico`。
 - **可拖动进度**：媒体通过支持 `Range` 的路由流式返回，大文件不会一次性读完。
 
 ## 截图
 
-| 开屏效果 | 设置页 |
+| 开屏效果 | 设置页面 |
 |---|---|
-| ![开屏动画](assets/screenshots/splash.png) | ![设置页](assets/screenshots/settings.png) |
+| ![开屏动画](assets/screenshots/splash.png) | ![设置页面](assets/screenshots/settings.png) |
 
 ## 安装
 
@@ -48,7 +48,7 @@ git clone https://github.com/<你的用户名>/dsh-welcome-boot.git
 dsh plugin --profile <profile> add <本地绝对路径>
 ```
 
-安装后**重启 DSH**（宿主半是 Node 模块，需要重新加载）。
+安装后**重启 DSH**（索引是 Node 模块，需要重新加载）。
 
 ## 使用
 
@@ -68,7 +68,7 @@ dsh plugin --profile <profile> add <本地绝对路径>
 
 ## 配置
 
-设置页写入的状态文件（优先级最高）：
+设置页面写入的状态文件（优先级最高）：
 
 ```
 $DSH_HOME/dsh-welcome-boot/config.json
@@ -104,24 +104,24 @@ $DSH_HOME/dsh-welcome-boot/config.json
 
 ## 工作原理
 
-- **宿主半**（`index.js`）注册四条路由：
+- **索引**（`index.js`）注册四条路由：
 
   | 路由 | 作用 |
   |---|---|
   | `GET /dsh-welcome-boot/config.json` | 返回生效配置与媒体描述 |
   | `POST /dsh-welcome-boot/config` | 保存 `src` / `muted` / `builtin` / `volume` 的任意子集 |
-  | `POST /dsh-welcome-boot/pick` | 在宿主侧弹出原生文件对话框 |
+  | `POST /dsh-welcome-boot/pick` | 在本机弹出原生文件对话框 |
   | `GET /dsh-welcome-boot/asset/<name>` | 流式返回当前配置的媒体，支持 `Range` |
 
-- **界面半**（`client.js`）注册到两个槽位：`shell.overlay`（开屏覆盖层，仅在配置了可播媒体时注册）与 `settings.plugins.tab`（设置页）。
+- **动画**（`client.js`）注册到两个槽位：`shell.overlay`（开屏页面，仅在配置了可播媒体时注册）与 `settings.plugins.tab`（设置页面）。
 - 首帧之前用同步请求读取配置，避免「界面先闪一下再出现动画」。
 
 ## 目录结构
 
 ```
 .
-├─ index.js              宿主半：路由、配置读写、媒体解析
-├─ client.js             界面半：开屏覆盖层 + 设置页
+├─ index.js              索引：路由、配置读写、媒体解析
+├─ client.js             动画：开屏页面 + 设置页面
 ├─ cordis.patch.yml      bundle 挂载声明
 ├─ package.json          清单（dsh.bundle / dsh.client）
 ├─ screenshots.json      市场详情页的截图清单
@@ -141,21 +141,10 @@ $DSH_HOME/dsh-welcome-boot/config.json
 
 - DSH Desktop 与 `dsh web`（Web 界面）。
 - Node.js >= 20。
-- Windows 上「选择文件…」走 PowerShell + STA 的原生对话框；没有对话框的宿主会提示直接填路径。
-
-## 致谢与差异
-
-本项目派生自 [KDDKBD/DeepSeek-splash-animation](https://github.com/KDDKBD/DeepSeek-splash-animation)（MIT，其版权声明保留在 [LICENSE](LICENSE) 中）。重命名之外，相对上游的差异：
-
-- 新增「内置视频」开关与「播放声音」勾选框；
-- 保存接口支持只提交部分字段（切换开关不会重写路径）；
-- 默认值改为有声，内置视频替换为自有素材；
-- 读取状态文件时容忍 UTF-8 BOM；
-- 本机回环请求不受 Host/Origin 护栏影响（桌面版设置页需要）；
-- 移除诊断日志。
+- Windows 上「选择文件…」走 PowerShell + STA 的原生对话框；没有可用对话框时会提示直接填路径。
 
 ## 许可
 
-插件代码采用 [MIT](LICENSE)。
+插件代码采用 [MIT](LICENSE)。本项目派生自 [KDDKBD/DeepSeek-splash-animation](https://github.com/KDDKBD/DeepSeek-splash-animation)（MIT），上游版权声明保留在 `LICENSE` 中。
 
 素材不在 MIT 覆盖范围内：`assets/default.mp4` 为自有素材；`assets/banner.webp`、`icon.webp`、`assets/icon-96.webp` 与 `assets/screenshots/` 由同一素材制作或截图。
